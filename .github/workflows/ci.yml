@@ -28,7 +28,7 @@ jobs:
         run: echo "Tag name -> ${{ steps.extract_tag.outputs.tag_name }}"
 
       - name: Log in to Github Container Registry
-        run: echo "${{ secrets.GH_TOKEN }}" | docker login -u "${{ secrets.GH_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GH_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
         run: docker build -t ghcr.io/iagor1/:${{ steps.extract_tag.outputs.tag_name }} .
