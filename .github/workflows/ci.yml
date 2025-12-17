@@ -20,7 +20,7 @@ jobs:
           echo github_ref $GITHUB_REF
           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-          echo "something-output" >> $GITHUB_OUTPUT
+          echo "output=output-test" >> $GITHUB_OUTPUT
           echo $GITHUB_OUTPUT
           echo "::set-output name=tag_name::$(echo $GITHUB_REF | sed 's/refs\/tags\///')"
 
