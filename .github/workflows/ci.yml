@@ -21,8 +21,8 @@ jobs:
           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
           echo "output=output-test" >> $GITHUB_OUTPUT
-          echo $GITHUB_OUTPUT
-          echo "::set-output name=tag_name::$(echo $GITHUB_REF | sed 's/refs\/tags\///')"
+          # echo $GITHUB_OUTPUT
+          # echo "::set-output name=tag_name::$(echo $GITHUB_REF | sed 's/refs\/tags\///')"
 
       - name: Show tag name
         run: echo "Tag name -> ${{ steps.extract_tag.outputs.tag_name }}"
@@ -31,7 +31,7 @@ jobs:
         run: echo "${{ secrets.GH_TOKEN }}" | docker login ghcr.io -u "${{ secrets.GH_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/iagor1/:${{ steps.extract_tag.outputs.tag_name }} .
+        run: docker build -t ghcr.io/iagor1/ubuntu-test:$GITHUB_REF_NAME .
         
       - name: Push Docker Image
-        run: docker push ghcr.io/iagor1/:${{ steps.extract_tag.outputs.tag_name }}
+        run: docker push ghcr.io/iagor1/ubuntu-test:$GITHUB_REF_NAME
